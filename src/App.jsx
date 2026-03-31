@@ -12,10 +12,15 @@ import {
    CheckCircle ,
    Award,
     ShieldCheck, 
+    Mail,
+    Phone,
+    MapPin,
   Paintbrush,
 
   ScanSearch,
 }  from "lucide-react";
+
+import heroImg from "./assets/Industrial-Rope-Access-Trade-Association.jpg";
 import { Settings } from "lucide-react";
 import { HardHat } from "lucide-react";
 function useRoute() {
@@ -61,6 +66,16 @@ const GLOBAL_CSS = `
   a { color: inherit; text-decoration: none; }
   img { display: block; max-width: 100%; }
 
+:root {
+  --nav-height: 100px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 90px;
+  }
+}
+
   /* Color scheme: Navy blue #1e3a5f, Blue #0066FF */
   .page-shell { width: 100%; overflow-x: hidden; }
   
@@ -68,9 +83,9 @@ const GLOBAL_CSS = `
   .navbar.scrolled { box-shadow: 0 4px 24px rgba(30,58,95,0.12); }
   .navbar-inner { margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 27px 24px; }
   .logo-btn { display: flex; align-items: center; gap: 12px; border: none; background: transparent; cursor: pointer; padding: 0; }
-  .logo-text { display: grid; line-height: 1.1; text-align: left; }
-  .logo-main { font-weight: 800; font-size: 16px; color: #1e3a5f; }
-  .logo-sub { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #0066FF; font-weight: 700; }
+  .logo-text { display: grid; line-height: 1.1; text-align: left;   gap: 4px;  }
+  .logo-main { font-weight: 800; font-size: 18px; color: #1e3a5f; }
+  .logo-sub { font-size: 12px; letter-spacing: 0.22em;  color: #0066FF; font-weight: 1000; }
   
   .nav-desktop { display: flex; align-items: center; gap: 4; }
   .nav-link { cursor: pointer; color: #4a5f7f; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; padding: 10px 16px; border-radius: 6px; transition: all 0.2s; }
@@ -85,7 +100,7 @@ const GLOBAL_CSS = `
   .mobile-menu-item.active { color: #0066FF; }
 
   /* Hero section */
-  .hero-panel { position: relative; min-height: 60vh; display: flex; align-items: center; justify-content: center; padding: 110px 24px 80px; background: linear-gradient(rgba(30, 58, 95, 0.3), rgba(30, 58, 95, 0.3)), url('https://www.accessropes.com/wp-content/uploads/2023/08/Rope-Access-Techniques_.jpg') center/cover no-repeat; overflow: hidden; }
+  .hero-panel { position: relative; min-height: 60vh; display: flex; align-items: center; justify-content: center; padding: 110px 24px 80px; background: linear-gradient(rgba(30, 58, 95, 0.3), rgba(30, 58, 95, 0.3)), url(${heroImg}) center/cover no-repeat; overflow: hidden; }
   .hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; max-width: 1200px; margin: 0 auto; }
   
   .hero-tag { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: #060606; margin-bottom: 24px; }
@@ -233,8 +248,8 @@ const GLOBAL_CSS = `
 
 }
     .logo-btn { gap: 8px; }
-    .logo-main { font-size: 13px; }
-    .logo-sub { font-size: 8px; }
+    .logo-main { font-size: 23px; }
+    .logo-sub { font-size: 16px; }
     
     /* Hero mobile */
     .hero-panel { padding: 60px 16px 30px; min-height: 54vh; }
@@ -348,10 +363,11 @@ function Navbar({ currentPage }) {
     <header className={`navbar${scrolled ? " scrolled" : ""}`}>
       <div className="navbar-inner">
         <button className="logo-btn" onClick={() => { navigate("home"); setMenuOpen(false); }}>
-          <GlobalAccessLogo size={46} />
+          <GlobalAccessLogo size={50} />
           <div className="logo-text">
-            <span className="logo-main">Global</span>
-            <span className="logo-main">ACCESS</span>
+            <span className="logo-main">Global Access</span>
+            {/* <span className="logo-main">Access</span> */}
+            
             <span className="logo-sub">Technical Services</span>
           </div>
         </button>
@@ -778,7 +794,7 @@ function ContactPage() {
                 <div className="info-icon"><Phone size={18} /></div>
                 <div className="info-text">
                   <strong>Phone</strong>
-                  +1 (555) 014-2300
+                  +91 99442 76828
                 </div>
               </div>
               <div className="info-item">
@@ -862,7 +878,7 @@ export default function App() {
     <div className="page-shell">
       <style>{GLOBAL_CSS}</style>
       <Navbar currentPage={page} />
-      <main style={{ paddingTop: 100 }}>
+      <main style={{ paddingTop: "var(--nav-height)" }}>
         {renderPage()}
       </main>
       <Footer />
