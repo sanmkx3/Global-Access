@@ -1,19 +1,23 @@
 import { useState, useEffect } from "react";
 import {
-  ShieldCheck,
-  Zap,
   Eye,
-  Layers,
-  Users,
-  MapPin,
-  Mail,
-  Phone,
-  Globe,
-  Award,
-  CheckCircle,
   Shield,
-} from "lucide-react";
+  Zap,
+  Globe,
+  Users,
+  Layers,
+  Wrench,
+  Hammer,
+  Building,
+   CheckCircle ,
+   Award,
+    ShieldCheck, 
+  Paintbrush,
 
+  ScanSearch,
+}  from "lucide-react";
+import { Settings } from "lucide-react";
+import { HardHat } from "lucide-react";
 function useRoute() {
   const [page, setPage] = useState(window.location.hash.replace("#", "") || "home");
   useEffect(() => {
@@ -62,7 +66,7 @@ const GLOBAL_CSS = `
   
   .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 999; background: rgba(255,255,255,0.95); box-shadow: 0 2px 16px rgba(30,58,95,0.08); }
   .navbar.scrolled { box-shadow: 0 4px 24px rgba(30,58,95,0.12); }
-  .navbar-inner { margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 16px 24px; }
+  .navbar-inner { margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 27px 24px; }
   .logo-btn { display: flex; align-items: center; gap: 12px; border: none; background: transparent; cursor: pointer; padding: 0; }
   .logo-text { display: grid; line-height: 1.1; text-align: left; }
   .logo-main { font-weight: 800; font-size: 16px; color: #1e3a5f; }
@@ -110,9 +114,56 @@ const GLOBAL_CSS = `
   .grid-3 { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; }
   .grid-2 { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; }
   
-  .service-card { background: #fff; border: 1px solid #e8ecf4; border-radius: 14px; overflow: hidden; box-shadow: 0 6px 20px rgba(30,58,95,0.06); transition: all 0.28s; }
+  /* Horizontal Scroll Container */
+  .services-scroll-container { 
+    width: 100%; 
+    overflow-x: auto; 
+    overflow-y: hidden; 
+  padding: 10px 0;   /* smaller clean spacing */
+  margin: 0;         /* FIX: no negative margin */
+    scroll-behavior: smooth;
+  }
+  
+  .services-scroll-container::-webkit-scrollbar { height: 8px; }
+  .services-scroll-container::-webkit-scrollbar-track { background: #f0f4fa; }
+  .services-scroll-container::-webkit-scrollbar-thumb { background: #0066FF; border-radius: 4px; }
+  
+  .services-scroll-wrapper { 
+    display: flex; 
+    gap: 24px; 
+    padding: 20px 0;
+    width: fit-content;
+    animation: scrollLeftRight 60s linear infinite;
+  }
+  
+  .services-scroll-wrapper.direction-right {
+    animation: scrollRightLeft 60s linear infinite;
+  }
+  
+  @keyframes scrollLeftRight {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  
+  @keyframes scrollRightLeft {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+  
+  .service-card { 
+    background: #fff; 
+    border: 1px solid #e8ecf4; 
+    border-radius: 14px; 
+    overflow: hidden; 
+    box-shadow: 0 6px 20px rgba(30,58,95,0.06); 
+    transition: all 0.28s;
+     width: 20vw;        /* responsive width */
+  min-width: 280px;   /* prevents too small */
+  max-width: 340px;   /* prevents too large */
+    flex-shrink: 0;
+  }
   .service-card:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(30,58,95,0.1); border-color: #0066FF; }
-  .service-card-img { width: 100%; height: 200px; background: linear-gradient(135deg, #e8ecf4, #f0f4fc); }
+  .service-card-img { width: 100%; height: 280px; background: linear-gradient(135deg, #e8ecf4, #f0f4fc); }
   .service-card-img img { width: 100%; height: 100%; object-fit: cover; }
   .service-card-content { padding: 24px; }
   .service-icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 10px; background: rgba(0,102,255,0.12); color: #0066FF; margin-bottom: 14px; }
@@ -165,6 +216,7 @@ const GLOBAL_CSS = `
     .navbar-inner { padding: 14px 16px; gap: 16px; }
     .logo-main { font-size: 14px; }
     .logo-sub { font-size: 9px; }
+    .service-card { min-width: 300px; }
   }
   
   @media (max-width: 768px) {
@@ -172,7 +224,14 @@ const GLOBAL_CSS = `
     .mobile-nav { display: flex !important; align-items: center; justify-content: center; flex-direction: column; gap: 5px; }
     
     /* Navbar mobile */
-    .navbar-inner { padding: 12px 14px; }
+    @media (max-width: 768px) {
+
+  .navbar-inner {
+    height: 100px;
+    padding: 0 16px;
+  }
+
+}
     .logo-btn { gap: 8px; }
     .logo-main { font-size: 13px; }
     .logo-sub { font-size: 8px; }
@@ -199,8 +258,22 @@ const GLOBAL_CSS = `
     .img-grid-2 { grid-template-columns: 1fr; gap: 12px; }
     
     /* Cards mobile */
-    .service-card { border-radius: 12px; }
-    .service-card-img { height: 160px; }
+ .service-card {
+    width: 280px;        /* FIXED width */
+    min-width: 180px;    /* keep consistency */
+    flex-shrink: 0;
+    border-radius: 12px;
+  }
+
+  .services-scroll-wrapper {
+    gap: 12px;           /* tighter spacing */
+  }
+
+  .service-card-img {
+    height: 150px;       /* slightly smaller image */
+  }
+}
+    .service-card-img { height: 180px; }
     .service-card-content { padding: 18px; }
     .service-icon { width: 40px; height: 40px; }
     .service-title { font-size: 14px; }
@@ -400,18 +473,20 @@ function HomePage() {
             <span className="section-tag">Service Portfolio</span>
             <h2 className="section-title">Access Solutions Built on Expertise</h2>
           </div>
-          <div className="grid-4">
-            {SERVICES.map((service, idx) => (
-              <div key={idx} className="service-card">
-                <div className="service-card-img">
-                  <img src={service.img} alt={service.title} />
+          <div className="services-scroll-container">
+            <div className="services-scroll-wrapper">
+              {[...SERVICES, ...SERVICES].map((service, idx) => (
+                <div key={idx} className="service-card">
+                  <div className="service-card-img">
+                    <img src={service.img} alt={service.title} />
+                  </div>
+                  <div className="service-card-content">
+                    <h3 className="service-title">{service.title}</h3>
+                    <p className="service-desc">{service.desc}</p>
+                  </div>
                 </div>
-                <div className="service-card-content">
-                  <h3 className="service-title">{service.title}</h3>
-                  <p className="service-desc">{service.desc}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
@@ -483,48 +558,112 @@ function ServicesPage() {
         <p className="section-subtitle">From industrial inspections to commercial work and offshore operations, we provide full-spectrum rope access services.</p>
       </div>
 
-      <div className="grid-3">
-        {[
-          { 
-            icon: Eye, 
-            title: "Inspection Services", 
-            desc: "Rope access inspections of facades, tanks, piping, bridges, and structural elements with detailed documentation and reporting." 
-          },
-          { 
-            icon: Shield, 
-            title: "Maintenance Services", 
-            desc: "Routine maintenance, repairs, and corrective work on buildings, structures, and equipment at height without operational disruption." 
-          },
-          { 
-            icon: Zap, 
-            title: "Repair Services", 
-            desc: "Fast-response repairs on facades, roofing, mechanical systems, and specialized industrial equipment in hard-to-reach locations." 
-          },
-          { 
-            icon: Globe, 
-            title: "Industrial Rope Access", 
-            desc: "Specialized access operations for power plants, refineries, manufacturing facilities, and heavy industrial infrastructure." 
-          },
-          { 
-            icon: Award, 
-            title: "Commercial Building Access", 
-            desc: "Professional maintenance, glazing repair, pressure washing, and exterior work on office towers and commercial structures." 
-          },
-          { 
-            icon: Users, 
-            title: "Offshore Support", 
-            desc: "Offshore rope access for rigs, platforms, vessels, and maritime structures with international compliance and safety standards." 
-          },
-        ].map((item, idx) => (
-          <div key={idx} style={{ background: "#fff", border: "1px solid #e8ecf4", borderRadius: 14, padding: 24, boxShadow: "0 6px 20px rgba(30,58,95,0.06)" }}>
-            <div style={{ width: 44, height: 44, display: "grid", placeItems: "center", borderRadius: 10, background: "rgb(161, 216, 246)", color: "#0e93f1", marginBottom: 14 }}>
-              <item.icon size={26} />
-            </div>
-            <h3 style={{ fontSize: 16, fontWeight: 700, color: "#1e3a5f", marginBottom: 10 }}>{item.title}</h3>
-            <p style={{ fontSize: 14, lineHeight: 1.7, color: "#4a5f7f" }}>{item.desc}</p>
-          </div>
-        ))}
+  <div className="grid-3">
+  {[
+    { 
+      icon: Wrench, 
+      title: "Rope Access Maintenance", 
+      desc: "Efficient maintenance services for buildings and industrial structures using advanced rope access techniques, reducing downtime and eliminating the need for scaffolding." 
+    },
+    { 
+      icon: Hammer, 
+      title: "Welding & Fabrication", 
+      desc: "Specialized welding and fabrication services performed at height with precision, ensuring structural strength and compliance with industry standards." 
+    },
+    { 
+      icon: Layers, 
+      title: "Insulation Services", 
+      desc: "Professional insulation installation and maintenance for pipelines, tanks, and industrial systems to improve efficiency and durability." 
+    },
+    { 
+      icon: Settings, 
+      title: "Welding & Mechanical Work", 
+      desc: "Comprehensive mechanical and welding solutions including repairs, installations, and modifications in complex access environments." 
+    },
+    { 
+      icon: Shield, 
+      title: "Confined Space Work", 
+      desc: "Safe execution of operations in confined and hazardous spaces with trained personnel, proper equipment, and strict safety compliance." 
+    },
+    { 
+      icon: Users, 
+      title: "Manpower Resourcing", 
+      desc: "Provision of skilled and certified technicians for industrial, commercial, and offshore projects based on client requirements." 
+    },
+    { 
+      icon: Building, 
+      title: "Installation Works", 
+      desc: "Professional installation of industrial components, systems, and structures at height using efficient rope access methods." 
+    },
+    { 
+      icon: Eye, 
+      title: "Facade & Glass Cleaning", 
+      desc: "High-quality cleaning of building facades and glass surfaces ensuring safety, clarity, and a professional finish." 
+    },
+    { 
+      icon: ScanSearch, 
+      title: "Industrial Inspection Services", 
+      desc: "Detailed inspection of structures, pipelines, and equipment with accurate reporting to ensure safety and compliance." 
+    },
+    { 
+      icon: Paintbrush, 
+      title: "Painting & Coating Services", 
+      desc: "Protective painting and coating solutions for industrial and commercial structures to enhance durability and corrosion resistance." 
+    },
+    { 
+      icon: HardHat, 
+      title: "Rigging & Lifting Operations", 
+      desc: "Safe and controlled rigging and lifting services for heavy equipment and materials in complex and high-risk environments." 
+    },
+  ].map((item, idx) => (
+    <div 
+      key={idx} 
+      style={{ 
+        background: "#fff", 
+        border: "1px solid #e8ecf4", 
+        borderRadius: 14, 
+        padding: 24, 
+        boxShadow: "0 6px 20px rgba(30,58,95,0.06)" 
+      }}
+    >
+      <div 
+        style={{ 
+          width: 44, 
+          height: 44, 
+          display: "grid", 
+          placeItems: "center", 
+          borderRadius: 10, 
+          background: "rgb(161, 216, 246)", 
+          color: "#0e93f1", 
+          marginBottom: 14 
+        }}
+      >
+        <item.icon size={26} />
       </div>
+
+      <h3 
+        style={{ 
+          fontSize: 16, 
+          fontWeight: 700, 
+          color: "#1e3a5f", 
+          marginBottom: 10 
+        }}
+      >
+        {item.title}
+      </h3>
+
+      <p 
+        style={{ 
+          fontSize: 14, 
+          lineHeight: 1.7, 
+          color: "#4a5f7f" 
+        }}
+      >
+        {item.desc}
+      </p>
+    </div>
+  ))}
+</div>
     </section>
   );
 }
@@ -723,7 +862,7 @@ export default function App() {
     <div className="page-shell">
       <style>{GLOBAL_CSS}</style>
       <Navbar currentPage={page} />
-      <main style={{ paddingTop: 70 }}>
+      <main style={{ paddingTop: 100 }}>
         {renderPage()}
       </main>
       <Footer />
