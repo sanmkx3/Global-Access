@@ -365,7 +365,7 @@ function Navbar({ currentPage }) {
         <button className="logo-btn" onClick={() => { navigate("home"); setMenuOpen(false); }}>
           <GlobalAccessLogo size={50} />
           <div className="logo-text">
-            <span className="logo-main">Global Access</span>
+            <span className="logo-main">Arrow Access</span>
             {/* <span className="logo-main">Access</span> */}
             
             <span className="logo-sub">Technical Services</span>
@@ -524,10 +524,10 @@ function AboutPage() {
     <section className="content-shell" id="about">
       <div className="feature-grid">
         <div>
-          <span className="section-tag">About Global Access</span>
+          <span className="section-tag">About Arrow Access</span>
           <h2 className="section-title" style={{ marginBottom: 24 }}>We Deliver Safe Work at Height</h2>
           <p style={{ fontSize: 14, lineHeight: 1.8, color: "#4a5f7f", marginBottom: 14 }}>
-            Global Access Technical Services is a leader in rope access operations, providing industrial-grade inspections, maintenance, repairs, and specialized access work across commercial, industrial, and offshore environments.
+            Arrow Access Technical Services is a leader in rope access operations, providing industrial-grade inspections, maintenance, repairs, and specialized access work across commercial, industrial, and offshore environments.
           </p>
           <p style={{ fontSize: 14, lineHeight: 1.8, color: "#4a5f7f" }}>
             Our technicians combine years of field experience with rigorous IRATA-aligned training to execute work safely, efficiently, and to the highest professional standards.
@@ -743,15 +743,25 @@ function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = () => {
-    if (form.name && form.email) {
+const handleSubmit = async () => {
+  if (!form.name || !form.email) return;
+
+  try {
+    const res = await fetch("http://localhost:5000/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
+
+    if (res.ok) {
       setSubmitted(true);
-      setTimeout(() => {
-        setForm({ name: "", email: "", message: "" });
-        setSubmitted(false);
-      }, 3000);
     }
-  };
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   return (
     <section className="content-shell" id="contact">
@@ -787,32 +797,31 @@ function ContactPage() {
                 <div className="info-icon"><Mail size={18} /></div>
                 <div className="info-text">
                   <strong>Email</strong>
-                  <a href="mailto:info@globalaccess.com">info@globalaccess.com</a>
+                  {/* <a href="mailto:info@arrowaccess.com">info@arrowaccess.com</a> */}
+                    <a href="https://mail.google.com/mail/?view=cm&to=sanjaymkx2@gmail.com" target="_blank">
+  sanjaymkx2@gmail.com
+</a>
                 </div>
               </div>
               <div className="info-item">
                 <div className="info-icon"><Phone size={18} /></div>
                 <div className="info-text">
                   <strong>Phone</strong>
-                  +91 99442 76828
+                  +91 77087 76821
                 </div>
               </div>
               <div className="info-item">
                 <div className="info-icon"><MapPin size={18} /></div>
                 <div className="info-text">
                   <strong>Address</strong>
-                  123 Harbor Road<br />Houston, TX 77002
+                  18th cross, 
+Shanmuganagar,<br/> U.K.T.Malai,<br/>Trichy - 620102
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="contact-info-card" style={{ background: "linear-gradient(135deg, #1e3a5f 0%, #2d4a7a 100%)", color: "#fff", border: "none" }}>
-            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#FF6600", marginBottom: 12 }}>Email CTA</div>
-            <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10 }}>Start Your Assessment</h3>
-            <p style={{ fontSize: 13, lineHeight: 1.7, marginBottom: 16, opacity: 0.9 }}>Click to email our team directly. We typically respond within 24 hours.</p>
-            <a href="mailto:info@globalaccess.com?subject=Project%20Inquiry%20-%20Global%20Access&body=Hello%20Global%20Access%20Technical%20Services" className="btn-primary" style={{ display: "inline-flex", background: "#FF6600", textDecoration: "none", fontSize: "12px", padding: "12px 20px" }}>Email Our Team</a>
-          </div>
+         
         </div>
       </div>
     </section>
@@ -828,7 +837,7 @@ function Footer() {
             <div className="footer-logo">
               <GlobalAccessLogo size={40} />
               <div>
-                <div className="footer-title" style={{fontSize: "14px"}}>Global Access<br />Technical Services</div>
+                <div className="footer-title" style={{fontSize: "14px"}}>Arrow Access<br />Technical Services</div>
                 <div style={{ fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)", marginTop: 3 }}>Professional Rope Access</div>
               </div>
             </div>
@@ -849,7 +858,7 @@ function Footer() {
         </div>
 
         <div className="footer-copyright">
-          � 2026 Global Access Technical Services. All rights reserved.
+          � 2026 Arrow Access Technical Services. All rights reserved.
         </div>
       </div>
     </footer>
