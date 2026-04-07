@@ -1,61 +1,62 @@
 import express from "express";
+import nodemailer from "nodemailer";
 import cors from "cors";
 import dotenv from "dotenv";
-import { Resend } from "resend";
 
 dotenv.config();
 
 const app = express();
 
-// ✅ Initialize Resend
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-// ✅ Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "*",
-  methods: ["GET", "POST"],
+  origin: "*",
 }));
-
 app.use(express.json());
 
 // ✅ Health check
 app.get("/", (req, res) => {
-  res.json({
-    status: "OK",
-    message: "Backend running 🚀",
-  });
+  res.json({ status: "OK", message: "Backend running" });
 });
 
-// ✅ Email route
+// ✅ DEBUG POST
 app.post("/send", async (req, res) => {
-  console.log("🔥 POST /send hit at", new Date().toISOString());
+  console.log("🔥 POST /send hit");
   console.log("📦 Body:", req.body);
 
   const { name, email, message } = req.body;
 
-  // 🔍 Validation
+  // Step 1: Validate input
   if (!name || !email) {
     console.log("❌ Missing fields");
-    return res.status(400).json({
-      success: false,
-      error: "Name and email are required",
-    });
+    return res.status(400).json({ error: "Missing name or email" });
   }
 
-  try {
-    console.log("🚀 Sending email via Resend...");
+  // Step 2: Check ENV
+  console.log("📧 EMAIL_USER:", process.env.EMAIL_USER ? "Loaded" : "Missing");
+  console.log("🔑 EMAIL_PASS:", process.env.EMAIL_PASS ? "Loaded" : "Missing");
 
-    const response = await resend.emails.send({
-      from: "onboarding@resend.dev", // default test sender
-      to: process.env.EMAIL_TO,
+  try {
+    // Step 3: Create transporter
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    console.log("🚀 Sending email...");
+
+    // Step 4: Send mail
+    const info = await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER,
       subject: `New Contact from ${name}`,
-      reply_to: email,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
     });
 
-    console.log("✅ Email sent:", response);
+    console.log("✅ Email sent:", info.response);
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: "Email sent successfully",
     });
@@ -63,16 +64,11 @@ app.post("/send", async (req, res) => {
   } catch (err) {
     console.error("❌ ERROR:", err);
 
-    return res.status(500).json({
-      success: false,
-      error: err.message || "Email sending failed",
+    res.status(500).json({
+      error: err.message,
     });
   }
 });
 
-// ✅ Port (Render compatible)
 const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

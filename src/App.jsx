@@ -120,10 +120,10 @@ const GLOBAL_CSS = `
   
   /* Content sections */
   .content-shell { padding: 80px 24px; max-width: 1200px; margin: 0 auto; }
-  .section-header { margin-bottom: 48px; }
-  .section-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #0066FF; margin-bottom: 12px; }
+  .section-header { margin: 0 auto 48px; max-width: 780px; text-align: center; }
+  .section-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #0066FF; margin-bottom: 12px; display: inline-block; }
   .section-title { font-size: clamp(28px, 4vw, 48px); line-height: 1.1; margin-bottom: 16px; letter-spacing: -0.02em; color: #1e3a5f; font-weight: 800; }
-  .section-subtitle { font-size: 15px; line-height: 1.8; color: #4a5f7f; max-width: 800px; }
+  .section-subtitle { font-size: 15px; line-height: 1.8; color: #4a5f7f; max-width: 800px; margin: 0 auto; }
   
   .grid-4 { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 24px; }
   .grid-3 { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; }
@@ -199,17 +199,26 @@ const GLOBAL_CSS = `
   .banner-btn:hover { transform: scale(1.04); }
   
   /* Contact */
-  .contact-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px; align-items: start; }
-  .form-card { background: #fff; border: 1px solid #e8ecf4; border-radius: 14px; padding: 36px; }
-  .form-input { width: 100%; border: 1px solid #dbe3f0; border-radius: 8px; padding: 14px 16px; margin-bottom: 16px; background: #fafbff; color: #1e3a5f; font-size: 14px; transition: all 0.2s; }
+  .contact-grid { display: grid; grid-template-columns: 1.3fr 0.9fr; gap: 32px; align-items: stretch; justify-content: center; }
+  .form-card, .contact-info-card { background: #fff; border: 1px solid #e8ecf4; border-radius: 20px; padding: 36px; box-shadow: 0 24px 60px rgba(30,58,95,0.08); }
+  .form-card { min-height: 460px; display: flex; flex-direction: column; justify-content: space-between; }
+  .contact-card-header { margin-bottom: 28px; }
+  .contact-card-title { font-size: 22px; margin-bottom: 10px; }
+  .contact-card-copy { color: #4a5f7f; line-height: 1.8; }
+  .form-input { width: 100%; border: 1px solid #dbe3f0; border-radius: 14px; padding: 16px 18px; margin-bottom: 18px; background: #fafbff; color: #1e3a5f; font-size: 14px; transition: all 0.2s; }
   .form-input:focus { outline: none; border-color: #0066FF; background: #fff; box-shadow: 0 0 0 3px rgba(0,102,255,0.12); }
-  
-  .contact-info-card { background: #fff; border: 1px solid #e8ecf4; border-radius: 14px; padding: 28px; margin-bottom: 20px; }
-  .info-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
-  .info-icon { width: 40px; height: 40px; display: grid; place-items: center; background: rgba(0,102,255,0.12); border-radius: 8px; color: #0066FF; flex-shrink: 0; }
-  .info-text strong { display: block; font-weight: 700; color: #1e3a5f; margin-bottom: 3px; font-size: 14px; }
-  .info-text { font-size: 13px; color: #4a5f7f; line-height: 1.6; }
+  .form-note { display: block; font-size: 13px; color: #6b7a95; margin-bottom: 20px; }
+  .form-status { font-size: 13px; margin-bottom: 18px; color: #d04444; }
+  .contact-info-card { padding: 34px; display: grid; gap: 22px; }
+  .contact-info-card strong { font-weight: 700; }
+  .info-item { display: flex; align-items: cen; gap: 16px; margin-bottom: 16px; }
+  .info-icon { width: 48px; height: 48px; display: grid; place-items: center; background: rgba(0,102,255,0.12); border-radius: 12px; color: #0066FF; flex-shrink: 0; }
+  .info-text strong { display: block; font-weight: 700; color: #1e3a5f; margin-bottom: 6px; font-size: 14px; }
+  .info-text { font-size: 14px; color: #4a5f7f; line-height: 1.7; }
   .info-text a { color: #0066FF; font-weight: 600; }
+  .contact-highlight { display: inline-flex; align-items: center; justify-content: center; padding: 12px 18px; border-radius: 999px; background: rgba(0,102,255,0.08); color: #0066FF; font-size: 13px; font-weight: 700; width: fit-content; margin-bottom: 12px; }
+  .contact-support { font-size: 15px; font-weight: 700; color: #1e3a5f; margin-bottom: 8px; }
+  .contact-support-subtitle { font-size: 14px; color: #4a5f7f; line-height: 1.78; }
   
   .footer-panel { background: #1e3a5f; color: rgba(255,255,255,0.8); padding: 54px 24px 24px; }
   .footer-inner { max-width: 1200px; margin: 0 auto; }
@@ -742,26 +751,16 @@ function SafetyPage() {
 function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
-const handleSubmit = async () => {
-  if (!form.name || !form.email) return;
-
-  try {
-    const res = await fetch("https://global-access-backend.onrender.com/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
-
-    if (res.ok) {
-      setSubmitted(true);
+  const handleSubmit = () => {
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      setError("Please complete all fields before submitting.");
+      return;
     }
-  } catch (error) {
-    console.error(error);
-  }
-};
+    setError("");
+    setSubmitted(true);
+  };
 
   return (
     <section className="content-shell" id="contact">
@@ -771,59 +770,40 @@ const handleSubmit = async () => {
         <p className="section-subtitle">Send us your project details and we will respond with tailored solutions and a comprehensive estimate.</p>
       </div>
 
-      <div className="contact-grid">
-        <div className="form-card">
-          {submitted ? (
-            <div style={{ textAlign: "center", padding: "36px 0" }}>
-              <div style={{ fontSize: 40, marginBottom: 12, color: "#FF6600" }}>✓</div>
-              <h3 style={{ fontSize: 18, fontWeight: 700, color: "#1e3a5f", marginBottom: 6 }}>Message Received</h3>
-              <p style={{ fontSize: 13, color: "#4a5f7f", lineHeight: 1.7 }}>Thank you for reaching out. We will contact you shortly with a detailed proposal.</p>
-            </div>
-          ) : (
-            <>
-              <h3 style={{ fontSize: 18, fontWeight: 700, color: "#1e3a5f", marginBottom: 24 }}>Send us a message</h3>
-              <input className="form-input" type="text" placeholder="Your Name" value={form.name} onChange={(e) => setForm((prev) => ({ ...prev, name: e.target.value }))} />
-              <input className="form-input" type="email" placeholder="Email Address" value={form.email} onChange={(e) => setForm((prev) => ({ ...prev, email: e.target.value }))} />
-              <textarea className="form-input" rows="6" placeholder="Describe your project or access challenge..." value={form.message} onChange={(e) => setForm((prev) => ({ ...prev, message: e.target.value }))} style={{ resize: "vertical" }} />
-              <button className="btn-primary" style={{ width: "100%", padding: "14px 16px" }} onClick={handleSubmit}>Submit</button>
-            </>
-          )}
-        </div>
+     
+     
 
-        <div>
-          <div className="contact-info-card">
-            <div style={{ display: "grid", gap: 18 }}>
-              <div className="info-item">
-                <div className="info-icon"><Mail size={18} /></div>
-                <div className="info-text">
-                  <strong>Email</strong>
-                  {/* <a href="mailto:info@arrowaccess.com">info@arrowaccess.com</a> */}
-                    <a href="https://mail.google.com/mail/?view=cm&to=sanjaymkx2@gmail.com" target="_blank">
-  sanjaymkx2@gmail.com
-</a>
-                </div>
+        <div className="contact-info-card">
+          <div className="contact-highlight">Need assistance?</div>
+          <div>
+            <div className="contact-support">Get a fast response</div>
+            <p className="contact-support-subtitle">If you prefer, contact our team directly by phone or email for urgent rope access consultations.</p>
+          </div>
+          <div style={{ display: "grid", gap: 18 }}>
+            <div className="info-item">
+              <div className="info-icon"><Mail size={18} /></div>
+              <div className="info-text">
+                <strong>Email</strong>
+                <a href="mailto:sanjaymkx2@gmail.com">sanjaymkx2@gmail.com</a>
               </div>
-              <div className="info-item">
-                <div className="info-icon"><Phone size={18} /></div>
-                <div className="info-text">
-                  <strong>Phone</strong>
-                  +91 77087 76821
-                </div>
+            </div>
+            <div className="info-item">
+              <div className="info-icon"><Phone size={18} /></div>
+              <div className="info-text">
+                <strong>Phone</strong>
+                +91 77087 76821
               </div>
-              <div className="info-item">
-                <div className="info-icon"><MapPin size={18} /></div>
-                <div className="info-text">
-                  <strong>Address</strong>
-                  18th cross, 
-Shanmuganagar,<br/> U.K.T.Malai,<br/>Trichy - 620102
-                </div>
+            </div>
+            <div className="info-item">
+              <div className="info-icon"><MapPin size={18} /></div>
+              <div className="info-text">
+                <strong>Office</strong>
+                18th cross, Shanmuganagar, U.K.T.Malai,<br />Trichy - 620102
               </div>
             </div>
           </div>
-
-         
         </div>
-      </div>
+      
     </section>
   );
 }
