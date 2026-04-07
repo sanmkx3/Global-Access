@@ -747,7 +747,7 @@ const handleSubmit = async () => {
   if (!form.name || !form.email) return;
 
   try {
-    const res = await fetch("http://localhost:5000/send", {
+    const res = await fetch("https://global-access-backend.onrender.com/send", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
