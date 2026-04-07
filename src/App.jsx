@@ -21,6 +21,27 @@ import {
 }  from "lucide-react";
 
 import heroImg from "./assets/Industrial-Rope-Access-Trade-Association.jpg";
+import glassimg from "./assets/glass.png";
+import confinedworkspace from "./assets/confinedworkspace.png";
+import industrialinspections from "./assets/industrialinspections.png";
+import installtion from "./assets/installtion.png";
+import manpowerRecruitment from "./assets/Manpower-Recruitment-1.png";
+import paintingandcoating from "./assets/paintingand coating.png";
+import rigging from "./assets/rigging.png";
+import weldingandfabrication from "./assets/weldingandfabrication.png";
+import weldingandmechnaics from "./assets/weldingandmechnaics.png";
+import oip from "./assets/OIP.webp";
+import ropeaccess from "./assets/ropeaccessmanagement.png";
+
+import rig1 from "./assets/rig1.png";
+import paint1 from "./assets/industrialpainiting.png";
+import rope1 from "./assets/ropeaccessmaintain.png"
+import inspect1 from "./assets/inspect1.png"
+
+import about1 from "./assets/about1.png";
+import about2 from "./assets/about2.png";
+
+import reactsvg from "./assets/react.svg";
 import { Settings } from "lucide-react";
 import { HardHat } from "lucide-react";
 function useRoute() {
@@ -431,22 +452,22 @@ function HeroSection() {
 const SERVICES = [
   {
     title: "Rope Access Maintenance",
-    img: "https://melioraccess.com/wp-content/uploads/2022/02/Maintenance-image.jpg",
+    img: rope1,
     desc: "Routine and corrective maintenance on buildings, structures, and equipment using engineered rope access techniques.",
   },
   {
     title: "Industrial Painting",
-    img: "https://acservicesinalbarsha.weebly.com/uploads/1/4/5/7/145780687/rope-access-image-1_orig.jpg",
+    img: paint1,
     desc: "High-performance painting and coating services for facades, tanks, chimneys, and industrial structures.",
   },
   {
     title: "Inspection Services",
-    img: "https://5.imimg.com/data5/SELLER/Default/2024/4/406529123/XY/EQ/WX/154996568/rope-access-inspection-maintenance-services-we-provide.jpg",
+    img: inspect1,
     desc: "Precis rope access inspections for facades, tanks, piping, and structural assessment with documentation.",
   },
   {
     title: "Rigging & Lifting Operations",
-    img: "https://media.licdn.com/dms/image/v2/C4E12AQHAOarSlC1ucg/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1643110895798?e=2147483647&v=beta&t=aYGj0FGyxks7Z13zQ5rRmnYJ7heILryzNMah4yv9nAQ",
+    img: rig1,
     desc: "Safe rigging and specialized lifting operations on complex industrial sites and high-rise structures.",
   },
 ];
@@ -544,10 +565,10 @@ function AboutPage() {
         </div>
         <div className="img-grid-2">
           <div className="img-wrapper">
-            <img src="https://evolution-access.com/wp-content/uploads/2026/03/blog-1-week-1-evolution-image.png" alt="Rope access team executing maintenance work" />
+            <img src={about1} alt="Rope access team executing maintenance work" />
           </div>
           <div className="img-wrapper">
-            <img src="https://i0.wp.com/clairvoyantuae.com/wp-content/uploads/2025/02/rope_access_safety_measures-1.jpg?w=640&ssl=1" alt="Safety-certified rope access operation" />
+            <img src={about2} alt="Safety-certified rope access operation" />
           </div>
         </div>
       </div>
@@ -574,121 +595,261 @@ function AboutPage() {
   );
 }
 
+// function ServicesPage() {
+//   return (
+//     <section className="content-shell" id="services">
+//       <div className="section-header">
+//         <span className="section-tag">Service Portfolio</span>
+//         <h2 className="section-title">Comprehensive Access Solutions</h2>
+//         <p className="section-subtitle">From industrial inspections to commercial work and offshore operations, we provide full-spectrum rope access services.</p>
+//       </div>
+
+//   <div className="grid-3">
+//   {[
+//     { 
+//       icon: Wrench, 
+//       title: "Rope Access Maintenance", 
+//       desc: "Efficient maintenance services for buildings and industrial structures using advanced rope access techniques, reducing downtime and eliminating the need for scaffolding." 
+//     },
+//     { 
+//       icon: Hammer, 
+//       title: "Welding & Fabrication", 
+//       desc: "Specialized welding and fabrication services performed at height with precision, ensuring structural strength and compliance with industry standards." 
+//     },
+//     { 
+//       icon: Layers, 
+//       title: "Insulation Services", 
+//       desc: "Professional insulation installation and maintenance for pipelines, tanks, and industrial systems to improve efficiency and durability." 
+//     },
+//     { 
+//       icon: Settings, 
+//       title: "Welding & Mechanical Work", 
+//       desc: "Comprehensive mechanical and welding solutions including repairs, installations, and modifications in complex access environments." 
+//     },
+//     { 
+//       icon: Shield, 
+//       title: "Confined Space Work", 
+//       desc: "Safe execution of operations in confined and hazardous spaces with trained personnel, proper equipment, and strict safety compliance." 
+//     },
+//     { 
+//       icon: Users, 
+//       title: "Manpower Resourcing", 
+//       desc: "Provision of skilled and certified technicians for industrial, commercial, and offshore projects based on client requirements." 
+//     },
+//     { 
+//       icon: Building, 
+//       title: "Installation Works", 
+//       desc: "Professional installation of industrial components, systems, and structures at height using efficient rope access methods." 
+//     },
+//     { 
+//       icon: Eye, 
+//       title: "Facade & Glass Cleaning", 
+//       desc: "High-quality cleaning of building facades and glass surfaces ensuring safety, clarity, and a professional finish." 
+//     },
+//     { 
+//       icon: ScanSearch, 
+//       title: "Industrial Inspection Services", 
+//       desc: "Detailed inspection of structures, pipelines, and equipment with accurate reporting to ensure safety and compliance." 
+//     },
+//     { 
+//       icon: Paintbrush, 
+//       title: "Painting & Coating Services", 
+//       desc: "Protective painting and coating solutions for industrial and commercial structures to enhance durability and corrosion resistance." 
+//     },
+//     { 
+//       icon: HardHat, 
+//       title: "Rigging & Lifting Operations", 
+//       desc: "Safe and controlled rigging and lifting services for heavy equipment and materials in complex and high-risk environments." 
+//     },
+//   ].map((item, idx) => (
+//     <div 
+//       key={idx} 
+//       style={{ 
+//         background: "#fff", 
+//         border: "1px solid #e8ecf4", 
+//         borderRadius: 14, 
+//         padding: 24, 
+//         boxShadow: "0 6px 20px rgba(30,58,95,0.06)" 
+//       }}
+//     >
+//       <div 
+//         style={{ 
+//           width: 44, 
+//           height: 44, 
+//           display: "grid", 
+//           placeItems: "center", 
+//           borderRadius: 10, 
+//           background: "rgb(161, 216, 246)", 
+//           color: "#0e93f1", 
+//           marginBottom: 14 
+//         }}
+//       >
+//         <item.icon size={26} />
+//       </div>
+
+//       <h3 
+//         style={{ 
+//           fontSize: 16, 
+//           fontWeight: 700, 
+//           color: "#1e3a5f", 
+//           marginBottom: 10 
+//         }}
+//       >
+//         {item.title}
+//       </h3>
+
+//       <p 
+//         style={{ 
+//           fontSize: 14, 
+//           lineHeight: 1.7, 
+//           color: "#4a5f7f" 
+//         }}
+//       >
+//         {item.desc}
+//       </p>
+//     </div>
+//   ))}
+// </div>
+//     </section>
+//   );
+// }
+
+
 function ServicesPage() {
+  const services = [
+    {
+      title: "Rope Access Maintenance",
+      img: ropeaccess,
+      desc: "Efficient maintenance services for buildings and industrial structures using advanced rope access techniques."
+    },
+    {
+      title: "Welding & Fabrication",
+      img: weldingandfabrication,
+      desc: "Specialized welding and fabrication services performed at height with precision."
+    },
+    {
+      title: "Insulation Services",
+      img: oip,
+      desc: "Professional insulation installation and maintenance for pipelines and systems."
+    },
+    {
+      title: "Welding & Mechanical Work",
+      img: weldingandmechnaics,
+      desc: "Comprehensive mechanical and welding solutions in complex environments."
+    },
+    {
+      title: "Confined Space Work",
+      img: confinedworkspace,
+      desc: "Safe execution of operations in confined and hazardous spaces."
+    },
+    {
+      title: "Manpower Resourcing",
+      img: manpowerRecruitment,
+      desc: "Provision of skilled and certified technicians for projects."
+    },
+    {
+      title: "Installation Works",
+      img: installtion,
+      desc: "Professional installation of industrial systems at height."
+    },
+    {
+      title: "Facade & Glass Cleaning",
+      img: glassimg,
+      desc: "High-quality facade and glass cleaning services."
+    },
+    {
+      title: "Industrial Inspection Services",
+      img: industrialinspections,
+      desc: "Detailed inspection of structures and pipelines."
+    },
+    {
+      title: "Painting & Coating Services",
+      img: paintingandcoating,
+      desc: "Protective painting and coating solutions."
+    },
+    {
+      title: "Rigging & Lifting Operations",
+      img: rigging,
+      desc: "Safe rigging and lifting services for heavy equipment."
+    }
+  ];
+
   return (
     <section className="content-shell" id="services">
       <div className="section-header">
         <span className="section-tag">Service Portfolio</span>
         <h2 className="section-title">Comprehensive Access Solutions</h2>
-        <p className="section-subtitle">From industrial inspections to commercial work and offshore operations, we provide full-spectrum rope access services.</p>
+        <p className="section-subtitle">
+          From industrial inspections to commercial work and offshore operations, we provide full-spectrum rope access services.
+        </p>
       </div>
 
-  <div className="grid-3">
-  {[
-    { 
-      icon: Wrench, 
-      title: "Rope Access Maintenance", 
-      desc: "Efficient maintenance services for buildings and industrial structures using advanced rope access techniques, reducing downtime and eliminating the need for scaffolding." 
-    },
-    { 
-      icon: Hammer, 
-      title: "Welding & Fabrication", 
-      desc: "Specialized welding and fabrication services performed at height with precision, ensuring structural strength and compliance with industry standards." 
-    },
-    { 
-      icon: Layers, 
-      title: "Insulation Services", 
-      desc: "Professional insulation installation and maintenance for pipelines, tanks, and industrial systems to improve efficiency and durability." 
-    },
-    { 
-      icon: Settings, 
-      title: "Welding & Mechanical Work", 
-      desc: "Comprehensive mechanical and welding solutions including repairs, installations, and modifications in complex access environments." 
-    },
-    { 
-      icon: Shield, 
-      title: "Confined Space Work", 
-      desc: "Safe execution of operations in confined and hazardous spaces with trained personnel, proper equipment, and strict safety compliance." 
-    },
-    { 
-      icon: Users, 
-      title: "Manpower Resourcing", 
-      desc: "Provision of skilled and certified technicians for industrial, commercial, and offshore projects based on client requirements." 
-    },
-    { 
-      icon: Building, 
-      title: "Installation Works", 
-      desc: "Professional installation of industrial components, systems, and structures at height using efficient rope access methods." 
-    },
-    { 
-      icon: Eye, 
-      title: "Facade & Glass Cleaning", 
-      desc: "High-quality cleaning of building facades and glass surfaces ensuring safety, clarity, and a professional finish." 
-    },
-    { 
-      icon: ScanSearch, 
-      title: "Industrial Inspection Services", 
-      desc: "Detailed inspection of structures, pipelines, and equipment with accurate reporting to ensure safety and compliance." 
-    },
-    { 
-      icon: Paintbrush, 
-      title: "Painting & Coating Services", 
-      desc: "Protective painting and coating solutions for industrial and commercial structures to enhance durability and corrosion resistance." 
-    },
-    { 
-      icon: HardHat, 
-      title: "Rigging & Lifting Operations", 
-      desc: "Safe and controlled rigging and lifting services for heavy equipment and materials in complex and high-risk environments." 
-    },
-  ].map((item, idx) => (
-    <div 
-      key={idx} 
-      style={{ 
-        background: "#fff", 
-        border: "1px solid #e8ecf4", 
-        borderRadius: 14, 
-        padding: 24, 
-        boxShadow: "0 6px 20px rgba(30,58,95,0.06)" 
-      }}
-    >
-      <div 
-        style={{ 
-          width: 44, 
-          height: 44, 
-          display: "grid", 
-          placeItems: "center", 
-          borderRadius: 10, 
-          background: "rgb(161, 216, 246)", 
-          color: "#0e93f1", 
-          marginBottom: 14 
-        }}
-      >
-        <item.icon size={26} />
+      <div className="grid-3">
+        {services.map((item, idx) => (
+          <div
+            key={idx}
+            style={{
+              position: "relative",
+              height: "260px",
+              borderRadius: "16px",
+              overflow: "hidden",
+              backgroundImage: `url(${item.img})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              display: "flex",
+              alignItems: "flex-end",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+              transition: "transform 0.3s ease"
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.transform = "scale(1.05)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.transform = "scale(1)")
+            }
+          >
+            {/* Overlay */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.2))"
+              }}
+            />
+
+            {/* Content */}
+            <div
+              style={{
+                position: "relative",
+                padding: "20px",
+                color: "#fff",
+                zIndex: 2
+              }}
+            >
+              <h3
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "700",
+                  marginBottom: "6px"
+                }}
+              >
+                {item.title}
+              </h3>
+
+              <p
+                style={{
+                  fontSize: "13px",
+                  lineHeight: "1.5",
+                  opacity: 0.9
+                }}
+              >
+                {item.desc}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
-
-      <h3 
-        style={{ 
-          fontSize: 16, 
-          fontWeight: 700, 
-          color: "#1e3a5f", 
-          marginBottom: 10 
-        }}
-      >
-        {item.title}
-      </h3>
-
-      <p 
-        style={{ 
-          fontSize: 14, 
-          lineHeight: 1.7, 
-          color: "#4a5f7f" 
-        }}
-      >
-        {item.desc}
-      </p>
-    </div>
-  ))}
-</div>
     </section>
   );
 }
