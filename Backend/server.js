@@ -6,9 +6,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-
 app.use(cors({
-  origin: "*",
+  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  methods: ["GET", "POST"],
+  credentials: true
 }));
 app.use(express.json());
 
