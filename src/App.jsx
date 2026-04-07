@@ -945,7 +945,7 @@ function ContactPage() {
               <div className="info-icon"><Mail size={18} /></div>
               <div className="info-text">
                 <strong>Email</strong>
-                <a href="mailto:sanjaymkx2@gmail.com">sanjaymkx2@gmail.com</a>
+                <a href="mailto:arrowaccess@gmail.com">arrowaccess@gmail.com</a>
               </div>
             </div>
             <div className="info-item">
