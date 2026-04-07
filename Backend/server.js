@@ -1,13 +1,16 @@
 import express from "express";
-import nodemailer from "nodemailer";
 import cors from "cors";
 import dotenv from "dotenv";
+import { Resend } from "resend";
 
 dotenv.config();
 
 const app = express();
 
-// ✅ CORS (safe + flexible)
+// ✅ Initialize Resend
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+// ✅ Middleware
 app.use(cors({
   origin: process.env.FRONTEND_URL || "*",
   methods: ["GET", "POST"],
@@ -34,46 +37,23 @@ app.post("/send", async (req, res) => {
   if (!name || !email) {
     console.log("❌ Missing fields");
     return res.status(400).json({
+      success: false,
       error: "Name and email are required",
     });
   }
 
-  console.log("📧 EMAIL_USER:", process.env.EMAIL_USER ? "Loaded" : "Missing");
-  console.log("🔑 EMAIL_PASS:", process.env.EMAIL_PASS ? "Loaded" : "Missing");
-
   try {
-    // ✅ Transporter with timeout (IMPORTANT FIX)
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-      connectionTimeout: 10000, // 10 sec
-    });
+    console.log("🚀 Sending email via Resend...");
 
-    // ✅ Verify connection before sending
-    await transporter.verify();
-    console.log("✅ SMTP connection verified");
-
-    console.log("🚀 Sending email...");
-
-    // ⏱ Timeout protection (prevents hanging)
-    const sendMailPromise = transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      replyTo: email, // ✅ better practice
+    const response = await resend.emails.send({
+      from: "onboarding@resend.dev", // default test sender
+      to: process.env.EMAIL_TO,
       subject: `New Contact from ${name}`,
+      reply_to: email,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
     });
 
-    const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error("Email sending timeout")), 10000)
-    );
-
-    const info = await Promise.race([sendMailPromise, timeoutPromise]);
-
-    console.log("✅ Email sent:", info.response);
+    console.log("✅ Email sent:", response);
 
     return res.status(200).json({
       success: true,
@@ -81,17 +61,18 @@ app.post("/send", async (req, res) => {
     });
 
   } catch (err) {
-    console.error("❌ ERROR:", err.message);
+    console.error("❌ ERROR:", err);
 
     return res.status(500).json({
       success: false,
-      error: err.message,
+      error: err.message || "Email sending failed",
     });
   }
 });
 
-// ✅ Port fix (Render compatible)
+// ✅ Port (Render compatible)
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
