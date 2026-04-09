@@ -30,7 +30,7 @@ import paintingandcoating from "./assets/paintingand coating.png";
 import rigging from "./assets/rigging.png";
 import weldingandfabrication from "./assets/weldingandfabrication.png";
 import weldingandmechnaics from "./assets/weldingandmechnaics.png";
-import oip from "./assets/OIP.webp";
+import oip from "./assets/insulation2.png";
 import ropeaccess from "./assets/ropeaccessmanagement.png";
 
 import rig1 from "./assets/rig1.png";
