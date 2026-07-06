@@ -1158,25 +1158,49 @@ function Footer() {
     />
   </div>
 
-  <div>
-    <div className="footer-title" style={{ fontSize: "14px" }}>
-      Arrow Access
-      <br />
-      Technical Services
-    </div>
-
-    <div
-      style={{
-        fontSize: 10,
-        letterSpacing: "0.2em",
-        textTransform: "uppercase",
-        color: "rgba(255,255,255,0.5)",
-        marginTop: 3,
-      }}
-    >
-      Professional Rope Access
-    </div>
+  <div
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    lineHeight: 1.1,
+  }}
+>
+  <div
+    style={{
+      fontSize: "16px",
+      fontStyle: "italic",
+      fontFamily: "'Arial Black', Arial, sans-serif",
+      letterSpacing: "1px",
+      lineHeight: 1,
+    }}
+  >
+    <span style={{ color: "#0A4EA3" }}>ARROW </span>
+    <span style={{ color: "#F8B400" }}>ACCESS</span>
   </div>
+
+  <div
+    style={{
+      fontSize: "14px",
+      fontWeight: 700,
+      color: "#0b5fb3",
+      marginTop: "4px",
+    }}
+  >
+    Technical Services
+  </div>
+
+  <div
+    style={{
+      fontSize: "10px",
+      letterSpacing: "0.2em",
+      textTransform: "uppercase",
+      color: "rgba(255,255,255,0.5)",
+      marginTop: "6px",
+    }}
+  >
+    Professional Rope Access
+  </div>
+</div>
 </div>
             <p className="footer-copy">
               Trusted provider of industrial rope access services for inspection, maintenance, repair, and offshore operations. Built on certified training, rigorous safety protocols, and professional excellence.
