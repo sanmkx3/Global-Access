@@ -19,7 +19,7 @@ import {
 
   ScanSearch,
 }  from "lucide-react";
-import logo  from "./assets/logo.jpeg";
+import logo  from "./assets/logo2.jpeg";
 import heroImg from "./assets/Industrial-Rope-Access-Trade-Association.jpg";
 import glassimg from "./assets/glass.png";
 import confinedworkspace from "./assets/confinedworkspace.png";
@@ -106,10 +106,27 @@ const GLOBAL_CSS = `
   .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 999; background: rgba(255,255,255,0.95); box-shadow: 0 2px 16px rgba(30,58,95,0.08); }
   .navbar.scrolled { box-shadow: 0 4px 24px rgba(30,58,95,0.12); }
   .navbar-inner { margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 27px 24px; }
-  .logo-btn { display: flex; align-items: center; gap: 12px; border: none; background: transparent; cursor: pointer; padding: 0; }
-  .logo-text { display: grid; line-height: 1.1; text-align: left;   gap: 4px;  }
-  .logo-main { font-weight: 800; font-size: 18px; color: #1e3a5f; }
-  .logo-sub { font-size: 12px; letter-spacing: 0.22em;  color: #0066FF; font-weight: 1000; }
+
+.logo-btn {
+    gap: 8px !important;
+     font-size: 14px;
+    font-weight: 1000;
+    font-style: italic;
+  }
+
+  .logo-btn img {
+    width: 55px !important;
+    height: 50px !important;
+  }
+
+  .logo-main {
+    font-size: 14px !important;
+  }
+
+  .logo-sub {
+    font-size: 12px !important;
+  }
+
   
   .nav-desktop { display: flex; align-items: center; gap: 4; }
   .nav-link { cursor: pointer; color: #4a5f7f; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; padding: 10px 16px; border-radius: 6px; transition: all 0.2s; }
@@ -410,22 +427,61 @@ function Navbar({ currentPage }) {
     navigate("home");
     setMenuOpen(false);
   }}
+  style={{
+    display: "flex",
+    alignItems: "center",
+    
+
+    background: "transparent",
+    border: "none",
+    cursor: "pointer",
+  }}
 >
   <img
     src={logo}
     alt="Arrow Access Logo"
     style={{
-      width: "90px",   // Increase or decrease as needed
-      height: "60px",
-      objectFit: "contain",
-      display: "block",
+      width: "80px",
+      height: "70px",
+    
+      // objectFit: "contain",
+      // display: "block",
       flexShrink: 0,
     }}
   />
 
-  <div className="logo-text">
-    <span className="logo-main">Arrow Access</span>
-    <span className="logo-sub">Technical Services</span>
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      lineHeight: 1.1,
+    }}
+  >
+    <div
+  style={{
+    fontSize: "20px",
+   
+    fontStyle: "italic",
+    fontFamily: "'Arial Black', Arial, sans-serif",
+    letterSpacing: "1px",
+    lineHeight: 1,
+  }}
+>
+  <span style={{ color: "#0A4EA3" }}>ARROW </span>
+  <span style={{ color: "#F8B400" }}>ACCESS</span>
+</div>
+
+    <span
+      style={{
+        fontSize: "20px",
+        fontWeight: 700,
+        color: "#0b5fb3",
+        // letterSpacing: "4px",
+        marginTop: "4px",
+      }}
+    >
+      Technical Services
+    </span>
   </div>
 </button>
 
