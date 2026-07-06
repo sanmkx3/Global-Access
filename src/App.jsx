@@ -411,30 +411,17 @@ function Navbar({ currentPage }) {
     setMenuOpen(false);
   }}
 >
-  <div
+  <img
+    src={logo}
+    alt="Arrow Access Logo"
     style={{
-      width: "60px",
+      width: "90px",   // Increase or decrease as needed
       height: "60px",
-      borderRadius: "50%",
-      border: "1px solid #acc8f3", // Outline color
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      overflow: "hidden",
-      background: "#fffefe",
+      objectFit: "contain",
+      display: "block",
       flexShrink: 0,
     }}
-  >
-    <img
-      src={logo}
-      alt="Arrow Access Logo"
-      style={{
-        width: "42px",
-        height: "42px",
-        objectFit: "contain",
-      }}
-    />
-  </div>
+  />
 
   <div className="logo-text">
     <span className="logo-main">Arrow Access</span>
