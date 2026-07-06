@@ -19,7 +19,7 @@ import {
 
   ScanSearch,
 }  from "lucide-react";
-
+import logo  from "./assets/logo.jpeg";
 import heroImg from "./assets/Industrial-Rope-Access-Trade-Association.jpg";
 import glassimg from "./assets/glass.png";
 import confinedworkspace from "./assets/confinedworkspace.png";
@@ -30,7 +30,7 @@ import paintingandcoating from "./assets/paintingand coating.png";
 import rigging from "./assets/rigging.png";
 import weldingandfabrication from "./assets/weldingandfabrication.png";
 import weldingandmechnaics from "./assets/weldingandmechnaics.png";
-import oip from "./assets/insulation2.png";
+import oip from "./assets/insulation3.png";
 import ropeaccess from "./assets/ropeaccessmanagement.png";
 
 import rig1 from "./assets/rig1.png";
@@ -40,6 +40,9 @@ import inspect1 from "./assets/inspect1.png"
 
 import about1 from "./assets/about1.png";
 import about2 from "./assets/about2.png";
+import fast from "./assets/fast.png";
+import irata from "./assets/irata.png";
+import scaffolding from "./assets/scaffolding.png";
 
 import reactsvg from "./assets/react.svg";
 import { Settings } from "lucide-react";
@@ -392,15 +395,52 @@ function Navbar({ currentPage }) {
   return (
     <header className={`navbar${scrolled ? " scrolled" : ""}`}>
       <div className="navbar-inner">
-        <button className="logo-btn" onClick={() => { navigate("home"); setMenuOpen(false); }}>
+        {/* <button className="logo-btn" onClick={() => { navigate("home"); setMenuOpen(false); }}>
           <GlobalAccessLogo size={50} />
           <div className="logo-text">
             <span className="logo-main">Arrow Access</span>
-            {/* <span className="logo-main">Access</span> */}
+         
             
             <span className="logo-sub">Technical Services</span>
           </div>
-        </button>
+        </button> */}
+<button
+  className="logo-btn"
+  onClick={() => {
+    navigate("home");
+    setMenuOpen(false);
+  }}
+>
+  <div
+    style={{
+      width: "60px",
+      height: "60px",
+      borderRadius: "50%",
+      border: "1px solid #acc8f3", // Outline color
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      overflow: "hidden",
+      background: "#fffefe",
+      flexShrink: 0,
+    }}
+  >
+    <img
+      src={logo}
+      alt="Arrow Access Logo"
+      style={{
+        width: "42px",
+        height: "42px",
+        objectFit: "contain",
+      }}
+    />
+  </div>
+
+  <div className="logo-text">
+    <span className="logo-main">Arrow Access</span>
+    <span className="logo-sub">Technical Services</span>
+  </div>
+</button>
 
         <nav className="nav-desktop">
           {navLinks.map((link) => (
@@ -485,7 +525,7 @@ function HomePage() {
             <p className="section-subtitle">We deliver safe, cost-effective access solutions with minimal disruption and world-class technical expertise.</p>
           </div>
 
-          <div className="grid-3">
+          {/* <div className="grid-3">
             {[
               {
                 icon: <CheckCircle size={24} />,
@@ -511,7 +551,74 @@ function HomePage() {
                 <p style={{ fontSize: 14, lineHeight: 1.7, color: "#4a5f7f" }}>{item.desc}</p>
               </div>
             ))}
-          </div>
+          </div> */}
+ <div className="grid-3">
+  {[
+    {
+      image: scaffolding,
+      title: "No Scaffolding Required",
+      desc: "Rope access eliminates the need for costly, time-consuming scaffolding setup and removal.",
+    },
+    {
+      image: irata,
+      title: "Safety-Certified Teams",
+      desc: "IRATA-certified technicians with rigorous training in high-access work and rescue procedures.",
+    },
+    {
+      image: fast,
+      title: "Fast Deployment",
+      desc: "Rapid mobilization and execution reduce project timelines and operational downtime.",
+    },
+  ].map((item, idx) => (
+    <div
+      key={idx}
+      style={{
+        background: "#fff",
+        border: "1px solid #e8ecf4",
+        borderRadius: 16,
+        overflow: "hidden",
+        boxShadow: "0 6px 20px rgba(30,58,95,0.06)",
+      }}
+    >
+      {/* Image */}
+      <img
+        src={item.image}
+        alt={item.title}
+        style={{
+          width: "100%",
+          height: "220px",
+          objectFit: "cover",
+          display: "block",
+        }}
+      />
+
+      {/* Content */}
+      <div style={{ padding: "24px" }}>
+        <h3
+          style={{
+            fontSize: "18px",
+            fontWeight: 700,
+            color: "#1e3a5f",
+            marginBottom: "10px",
+          }}
+        >
+          {item.title}
+        </h3>
+
+        <p
+          style={{
+            fontSize: "14px",
+            lineHeight: "1.7",
+            color: "#4a5f7f",
+            margin: 0,
+          }}
+        >
+          {item.desc}
+        </p>
+      </div>
+    </div>
+  ))}
+</div>
         </div>
 
         <div style={{ marginBottom: 60 }}>
@@ -975,13 +1082,59 @@ function Footer() {
       <div className="footer-inner">
         <div className="footer-grid">
           <div>
-            <div className="footer-logo">
+            {/* <div className="footer-logo">
               <GlobalAccessLogo size={40} />
               <div>
                 <div className="footer-title" style={{fontSize: "14px"}}>Arrow Access<br />Technical Services</div>
                 <div style={{ fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)", marginTop: 3 }}>Professional Rope Access</div>
               </div>
-            </div>
+            </div> */}
+            <div className="footer-logo">
+  <div
+    style={{
+      width: "60px",
+      height: "60px",
+      borderRadius: "50%",
+      border: "1px solid #acc8f3", // Outline color
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      overflow: "hidden",
+      background: "#fffefe",
+      flexShrink: 0,
+    }}
+  >
+    <img
+      src={logo}
+      alt="Arrow Access Logo"
+      style={{
+        width: "36px",
+        height: "36px",
+        objectFit: "contain",
+      }}
+    />
+  </div>
+
+  <div>
+    <div className="footer-title" style={{ fontSize: "14px" }}>
+      Arrow Access
+      <br />
+      Technical Services
+    </div>
+
+    <div
+      style={{
+        fontSize: 10,
+        letterSpacing: "0.2em",
+        textTransform: "uppercase",
+        color: "rgba(255,255,255,0.5)",
+        marginTop: 3,
+      }}
+    >
+      Professional Rope Access
+    </div>
+  </div>
+</div>
             <p className="footer-copy">
               Trusted provider of industrial rope access services for inspection, maintenance, repair, and offshore operations. Built on certified training, rigorous safety protocols, and professional excellence.
             </p>
