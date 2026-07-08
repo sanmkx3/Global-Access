@@ -1102,7 +1102,7 @@ function ContactPage() {
               <div className="info-icon"><Phone size={18} /></div>
               <div className="info-text">
                 <strong>Phone</strong>
-                +91 77087 76821
+                +91 99442 76828
               </div>
             </div>
             <div className="info-item">
